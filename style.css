@@ -1,4 +1,114 @@
-/* ===== Aviso de navegador interno ===== */
+/* Reseteo de márgenes y configuración básica */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 20px;
+}
+
+/* Sección del Logo */
+.logo-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.logo-section img {
+    width: 85%; /* Tamaño del logo */
+    max-width: 300px;
+    object-fit: contain;
+}
+
+/* Botón de Descarga */
+.download-btn {
+    background-color: #ff0000; /* Rojo brillante */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 15px 50px;
+    border-radius: 50px; /* Forma de píldora */
+    transition: transform 0.2s, background-color 0.2s;
+    display: inline-block;
+    text-align: center;
+    margin: auto 0; /* Centra el botón verticalmente en el espacio disponible */
+}
+
+.download-btn:active {
+    transform: scale(0.95);
+    background-color: #cc0000;
+}
+
+/* Sección Compartir */
+.share-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.share-section p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.share-btn {
+    background-color: #ff4d4d; /* Rojo claro */
+    border: none;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.share-btn:active {
+    transform: scale(0.9);
+}
+
+/* Estilos para el icono SVG */
+.share-btn svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ===================================================== */
+/* ===== AVISO DE NAVEGADOR INTERNO (NUEVA FUNCIÓN) ==== */
+/* ===================================================== */
+
 .browser-notice {
     display: none;                 /* Oculto por defecto */
     position: fixed;
