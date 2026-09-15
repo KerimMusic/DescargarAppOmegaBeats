@@ -16,7 +16,7 @@ function compartirApp() {
 }
 
 /* =========================================================
-   2) DETECTAR SI ESTAMOS DENTRO DE UN NAVEGADOR INTERNO
+   2) DETECTAR NAVEGADOR INTERNO
       (Instagram, Facebook, TikTok, Twitter/X, LinkedIn, etc.)
    ========================================================= */
 function esNavegadorInterno() {
@@ -54,24 +54,26 @@ function esNavegadorInterno() {
 
 /* =========================================================
    3) FORZAR APERTURA EN EL NAVEGADOR EXTERNO
+      Acepta una URL externa (por ejemplo, el APK) o usa la actual
    ========================================================= */
-function abrirEnNavegador() {
-    const url = window.location.href;
+function abrirEnNavegador(urlExterna) {
+    const url = urlExterna || window.location.href;
     const ua  = navigator.userAgent || navigator.vendor || window.opera;
     const esAndroid = /Android/i.test(ua);
     const esiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
 
     if (esAndroid) {
-        // Intenta abrir con Chrome; si no está, el sistema ofrece opciones
+        // Fuerza Chrome específicamente + fallback al navegador por defecto
         const sinProtocolo = url.replace(/^https?:\/\//, '');
         window.location.href =
-            `intent://${sinProtocolo}#Intent;scheme=https;` +
-            `S.browser_fallback_url=${encodeURIComponent(url)};end`;
+            'intent://' + sinProtocolo + '#Intent;' +
+            'scheme=https;' +
+            'package=com.android.chrome;' +
+            'S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
     } else if (esiOS) {
-        // iOS: intentar abrir Safari desde el WebView
-        // (funciona en muchos casos; si no, el usuario deberá usar el menú "..." de la app)
+        // iOS: intenta abrir Safari fuera del WebView
         const sinProtocolo = url.replace(/^https?:\/\//, '');
-        window.location.href = `x-safari-https://${sinProtocolo}`;
+        window.location.href = 'x-safari-https://' + sinProtocolo;
 
         // Fallback por si x-safari no está disponible
         setTimeout(() => {
@@ -83,16 +85,35 @@ function abrirEnNavegador() {
 }
 
 /* =========================================================
-   4) MOSTRAR EL AVISO AL CARGAR LA PÁGINA
+   4) AL CARGAR LA PÁGINA:
+      - Mostrar el aviso si estamos en un navegador interno
+      - Interceptar el botón Descargar para abrir el APK
+        en el navegador externo (Chrome / Safari)
    ========================================================= */
 document.addEventListener('DOMContentLoaded', function () {
+    const notice      = document.getElementById('browser-notice');
+    const downloadBtn = document.querySelector('.download-btn');
+
     if (esNavegadorInterno()) {
-        const notice = document.getElementById('browser-notice');
+
+        /* --- 4.1) Mostrar aviso arriba --- */
         if (notice) {
             notice.classList.add('show');
+            document.body.classList.add('has-notice');
+        }
 
-            // Ajusta el padding superior del body para que el aviso no tape el logo
-            document.body.style.paddingTop = notice.offsetHeight + 'px';
+        /* --- 4.2) CLAVE: interceptar el botón Descargar ---
+           Dentro de un WebView (Instagram, FB, TikTok…) las descargas
+           de APK están bloqueadas. Así que en vez de dejar que el
+           navegador interno intente descargar, abrimos el APK en el
+           navegador externo (Chrome / Safari). */
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                // Le pasamos la URL del APK (el href del propio botón)
+                abrirEnNavegador(downloadBtn.href);
+            });
         }
     }
 });
