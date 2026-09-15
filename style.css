@@ -1,106 +1,55 @@
-/* Reseteo de márgenes y configuración básica */
-* {
-    box-sizing: border-box;
+/* ===== Aviso de navegador interno ===== */
+.browser-notice {
+    display: none;                 /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+    color: #ffffff;
+    padding: 12px 14px;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+    animation: slideDown 0.4s ease-out;
+}
+
+.browser-notice.show {
+    display: flex;
+}
+
+.browser-notice .bn-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.browser-notice p {
+    font-size: 0.82rem;
+    line-height: 1.25;
     margin: 0;
-    padding: 0;
+    flex: 1;
 }
 
-body {
-    background-color: #000000; /* Fondo negro */
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-/* Contenedor principal */
-.container {
-    width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 20px;
-}
-
-/* Sección del Logo */
-.logo-section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.logo-section img {
-    width: 85%; /* Tamaño del logo */
-    max-width: 300px;
-    object-fit: contain;
-}
-
-/* Botón de Descarga */
-.download-btn {
-    background-color: #ff0000; /* Rojo brillante */
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 15px 50px;
-    border-radius: 50px; /* Forma de píldora */
-    transition: transform 0.2s, background-color 0.2s;
-    display: inline-block;
-    text-align: center;
-    margin: auto 0; /* Centra el botón verticalmente en el espacio disponible */
-}
-
-.download-btn:active {
-    transform: scale(0.95);
-    background-color: #cc0000;
-}
-
-/* Sección Compartir */
-.share-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.share-section p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-.share-btn {
-    background-color: #ff4d4d; /* Rojo claro */
+.browser-notice button {
+    background: #ffffff;
+    color: #cc0000;
     border: none;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 9px 16px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.82rem;
     cursor: pointer;
-    transition: transform 0.2s;
+    white-space: nowrap;
+    transition: transform 0.15s;
+    flex-shrink: 0;
 }
 
-.share-btn:active {
-    transform: scale(0.9);
+.browser-notice button:active {
+    transform: scale(0.94);
 }
 
-/* Estilos para el icono SVG */
-.share-btn svg {
-    width: 30px;
-    height: 30px;
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
 }
