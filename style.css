@@ -1,4 +1,6 @@
-/* Reseteo de márgenes y configuración básica */
+/* =========================================================
+   Reset y base
+   ========================================================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +8,7 @@
 }
 
 body {
-    background-color: #000000; /* Fondo negro */
+    background-color: #000000;
     color: #ffffff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -14,9 +16,17 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    transition: padding-top 0.3s ease;
 }
 
-/* Contenedor principal */
+/* Cuando el aviso está visible, empujamos el contenido */
+body.has-notice {
+    padding-top: 70px;
+}
+
+/* =========================================================
+   Contenedor principal
+   ========================================================= */
 .container {
     width: 100%;
     max-width: 400px;
@@ -28,7 +38,14 @@ body {
     padding: 60px 20px;
 }
 
-/* Sección del Logo */
+body.has-notice .container {
+    height: calc(100vh - 70px);
+    padding-top: 20px;
+}
+
+/* =========================================================
+   Logo
+   ========================================================= */
 .logo-section {
     width: 100%;
     display: flex;
@@ -37,24 +54,29 @@ body {
 }
 
 .logo-section img {
-    width: 85%; /* Tamaño del logo */
+    width: 85%;
     max-width: 300px;
     object-fit: contain;
 }
 
-/* Botón de Descarga */
+/* =========================================================
+   Botón de descarga
+   ========================================================= */
 .download-btn {
-    background-color: #ff0000; /* Rojo brillante */
+    background-color: #ff0000;
     color: #ffffff;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
     padding: 15px 50px;
-    border-radius: 50px; /* Forma de píldora */
+    border-radius: 50px;
     transition: transform 0.2s, background-color 0.2s;
     display: inline-block;
     text-align: center;
-    margin: auto 0; /* Centra el botón verticalmente en el espacio disponible */
+    margin: auto 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .download-btn:active {
@@ -62,7 +84,9 @@ body {
     background-color: #cc0000;
 }
 
-/* Sección Compartir */
+/* =========================================================
+   Sección Compartir
+   ========================================================= */
 .share-section {
     display: flex;
     flex-direction: column;
@@ -78,7 +102,7 @@ body {
 }
 
 .share-btn {
-    background-color: #ff4d4d; /* Rojo claro */
+    background-color: #ff4d4d;
     border: none;
     border-radius: 50%;
     width: 65px;
@@ -88,13 +112,13 @@ body {
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .share-btn:active {
     transform: scale(0.9);
 }
 
-/* Estilos para el icono SVG */
 .share-btn svg {
     width: 30px;
     height: 30px;
@@ -105,12 +129,11 @@ body {
     stroke-linejoin: round;
 }
 
-/* ===================================================== */
-/* ===== AVISO DE NAVEGADOR INTERNO (NUEVA FUNCIÓN) ==== */
-/* ===================================================== */
-
+/* =========================================================
+   AVISO DE NAVEGADOR INTERNO
+   ========================================================= */
 .browser-notice {
-    display: none;                 /* Oculto por defecto */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
