@@ -13,20 +13,22 @@
     <div id="browser-notice" class="browser-notice">
         <span class="bn-icon">⚠️</span>
         <p>Estás dentro de una app. Para descargar, ábrelo en tu navegador.</p>
-        <button onclick="abrirEnNavegador()">Abrir en navegador</button>
+        <button type="button" id="notice-btn">Abrir en navegador</button>
     </div>
 
     <div class="container">
-        
+
         <div class="logo-section">
             <img src="https://www.dropbox.com/scl/fi/6e7qxx06cip1720viw4zt/Omega.png?rlkey=pujvgx4l2w9cl3c2wiyk0tbgf&st=5wvschfp&raw=1" alt="Omega Beats Logo">
         </div>
 
-        <a href="https://apk.e-droid.net/apk/app4183393-bd2q7x.apk?v=3" class="download-btn" download>Descargar</a>
+        <a href="https://apk.e-droid.net/apk/app4183393-bd2q7x.apk?v=3"
+           class="download-btn"
+           rel="noopener">Descargar</a>
 
         <div class="share-section">
             <p>COMPARTIR</p>
-            <button class="share-btn" onclick="compartirApp()">
+            <button type="button" class="share-btn" onclick="compartirApp()">
                 <svg viewBox="0 0 24 24">
                     <circle cx="18" cy="5" r="3"></circle>
                     <circle cx="6" cy="12" r="3"></circle>
