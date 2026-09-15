@@ -1,119 +1,188 @@
 /* =========================================================
-   1) COMPARTIR
+   Reset y base
    ========================================================= */
-function compartirApp() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Omega Beats',
-            text: '¡Descarga la mejor app de beats!',
-            url: window.location.href
-        })
-        .then(() => console.log('Compartido con éxito'))
-        .catch((error) => console.log('Error al compartir', error));
-    } else {
-        alert("La función de compartir no está soportada en este navegador. Copia el enlace manualmente.");
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: padding-top 0.3s ease;
+}
+
+/* Cuando el aviso está visible, empujamos el contenido */
+body.has-notice {
+    padding-top: 70px;
 }
 
 /* =========================================================
-   2) DETECTAR NAVEGADOR INTERNO
-      (Instagram, Facebook, TikTok, Twitter/X, LinkedIn, etc.)
+   Contenedor principal
    ========================================================= */
-function esNavegadorInterno() {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
+.container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 20px;
+}
 
-    // Firmas típicas de WebViews / apps sociales
-    const firmas = [
-        'FBAN', 'FBAV', 'FB_IAB',          // Facebook
-        'Instagram',
-        'Twitter',
-        'Line',
-        'Snapchat',
-        'Pinterest',
-        'LinkedInApp',
-        'musical_ly', 'BytedanceWebview', 'TikTok', 'Bytedance', // TikTok
-        'MicroMessenger',                  // WeChat
-        'WhatsApp',
-        'GSA',                             // Google Search App
-        'KAKAOTALK',
-        'Naver'
-    ];
-
-    if (firmas.some(f => ua.indexOf(f) !== -1)) return true;
-
-    // Detección genérica de WebView (Android / iOS)
-    const esAndroidWebView = /Android/.test(ua) && /; wv\)/.test(ua);
-    const esIOSWebView =
-        /iPhone|iPad|iPod/.test(ua) &&
-        !/Safari/.test(ua) &&
-        !/CriOS/.test(ua) &&
-        !/FxiOS/.test(ua);
-
-    return esAndroidWebView || esIOSWebView;
+body.has-notice .container {
+    height: calc(100vh - 70px);
+    padding-top: 20px;
 }
 
 /* =========================================================
-   3) FORZAR APERTURA EN EL NAVEGADOR EXTERNO
-      Acepta una URL externa (por ejemplo, el APK) o usa la actual
+   Logo
    ========================================================= */
-function abrirEnNavegador(urlExterna) {
-    const url = urlExterna || window.location.href;
-    const ua  = navigator.userAgent || navigator.vendor || window.opera;
-    const esAndroid = /Android/i.test(ua);
-    const esiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+.logo-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    if (esAndroid) {
-        // Fuerza Chrome específicamente + fallback al navegador por defecto
-        const sinProtocolo = url.replace(/^https?:\/\//, '');
-        window.location.href =
-            'intent://' + sinProtocolo + '#Intent;' +
-            'scheme=https;' +
-            'package=com.android.chrome;' +
-            'S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
-    } else if (esiOS) {
-        // iOS: intenta abrir Safari fuera del WebView
-        const sinProtocolo = url.replace(/^https?:\/\//, '');
-        window.location.href = 'x-safari-https://' + sinProtocolo;
-
-        // Fallback por si x-safari no está disponible
-        setTimeout(() => {
-            window.open(url, '_blank');
-        }, 800);
-    } else {
-        window.open(url, '_blank');
-    }
+.logo-section img {
+    width: 85%;
+    max-width: 300px;
+    object-fit: contain;
 }
 
 /* =========================================================
-   4) AL CARGAR LA PÁGINA:
-      - Mostrar el aviso si estamos en un navegador interno
-      - Interceptar el botón Descargar para abrir el APK
-        en el navegador externo (Chrome / Safari)
+   Botón de descarga
    ========================================================= */
-document.addEventListener('DOMContentLoaded', function () {
-    const notice      = document.getElementById('browser-notice');
-    const downloadBtn = document.querySelector('.download-btn');
+.download-btn {
+    background-color: #ff0000;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 15px 50px;
+    border-radius: 50px;
+    transition: transform 0.2s, background-color 0.2s;
+    display: inline-block;
+    text-align: center;
+    margin: auto 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    if (esNavegadorInterno()) {
+.download-btn:active {
+    transform: scale(0.95);
+    background-color: #cc0000;
+}
 
-        /* --- 4.1) Mostrar aviso arriba --- */
-        if (notice) {
-            notice.classList.add('show');
-            document.body.classList.add('has-notice');
-        }
+/* =========================================================
+   Sección Compartir
+   ========================================================= */
+.share-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
 
-        /* --- 4.2) CLAVE: interceptar el botón Descargar ---
-           Dentro de un WebView (Instagram, FB, TikTok…) las descargas
-           de APK están bloqueadas. Así que en vez de dejar que el
-           navegador interno intente descargar, abrimos el APK en el
-           navegador externo (Chrome / Safari). */
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                // Le pasamos la URL del APK (el href del propio botón)
-                abrirEnNavegador(downloadBtn.href);
-            });
-        }
-    }
-});
+.share-section p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.share-btn {
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.share-btn:active {
+    transform: scale(0.9);
+}
+
+.share-btn svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* =========================================================
+   AVISO DE NAVEGADOR INTERNO
+   ========================================================= */
+.browser-notice {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+    color: #ffffff;
+    padding: 12px 14px;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+    animation: slideDown 0.4s ease-out;
+}
+
+.browser-notice.show {
+    display: flex;
+}
+
+.browser-notice .bn-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.browser-notice p {
+    font-size: 0.82rem;
+    line-height: 1.25;
+    margin: 0;
+    flex: 1;
+}
+
+.browser-notice button {
+    background: #ffffff;
+    color: #cc0000;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.82rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+
+.browser-notice button:active {
+    transform: scale(0.94);
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+}
