@@ -1,250 +1,46 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fresas Con Chantilly</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar Omega Beats</title>
+    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/6e7qxx06cip1720viw4zt/Omega.png?rlkey=pujvgx4l2w9cl3c2wiyk0tbgf&st=5wvschfp&raw=1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============ Icono reutilizable: caja de leche ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="icono-milk" viewBox="0 0 100 124">
-    <rect x="24" y="42" width="52" height="76" rx="2" fill="#ffffff" stroke="#e293b4" stroke-width="2.5"/>
-    <path d="M24 78 L76 60 L76 84 L24 102 Z" fill="#f6a8c6"/>
-    <line x1="34" y1="60" x2="66" y2="60" stroke="#f4c8da" stroke-width="3" stroke-linecap="round"/>
-    <line x1="34" y1="68" x2="58" y2="68" stroke="#f4c8da" stroke-width="3" stroke-linecap="round"/>
-    <line x1="34" y1="96" x2="66" y2="96" stroke="#f4c8da" stroke-width="3" stroke-linecap="round"/>
-    <line x1="34" y1="104" x2="58" y2="104" stroke="#f4c8da" stroke-width="3" stroke-linecap="round"/>
-    <polygon points="24,42 38,16 62,16 76,42" fill="#fbd6e5" stroke="#e293b4" stroke-width="2.5" stroke-linejoin="round"/>
-    <polygon points="38,16 50,8 62,16" fill="#f6a8c6" stroke="#e293b4" stroke-width="2.5" stroke-linejoin="round"/>
-    <text x="50" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#e2557f" font-family="Arial, sans-serif">MILK</text>
-    <circle cx="60" cy="72" r="4" fill="#ff3b6b"/>
-    <circle cx="42" cy="90" r="4" fill="#ff3b6b"/>
-  </symbol>
-</svg>
-
-<!-- ============ Pantalla principal (Galería) ============ -->
-<main class="galeria" id="pantalla-inicio">
-
-  <!-- ============ Header solo visible en la página de inicio ============ -->
-  <header class="header-inicio" id="header-inicio">
-    <div class="logo-koonol">
-      <span>Koonol</span>
-      <span>NAAT</span>
-    </div>
-    <div class="banner-producto">
-      <span class="banner-titulo">PRODUCTO</span>
-      <span class="banner-subtitulo">IRAPUATO GTO</span>
-    </div>
-  </header>
-  <!-- ============ Fin header ============ -->
-
-  <!-- ============ Tarjeta 1: Fresas con Chantilly ============ -->
-  <div class="panel clickable"
-       data-producto="Fresas Con Chantilly"
-       data-descripcion="Fresas frescas con chantilly"
-       data-precio="1 caja $35 MXN"
-       data-promo="Combo 3 x $100 MXN"
-       data-link="">
-    <div class="ilustracion">
-      <img src="https://www.dropbox.com/scl/fi/6hdoiow6p9zrdggcq98ow/Fresasconchatillin.jpeg?rlkey=u5w0swogl12vnyrwc0e9f8tkt&st=tunp96rb&raw=1"
-           alt="Fresas con Chantilly" loading="lazy">
-      <button class="btn-overlay" type="button">CONSULTAR SI HAY PRODUCTO</button>
-    </div>
-    <p>Fresas Con Chantilly</p>
-  </div>
-
-  <!-- ============ Tarjeta 2: Calcetines ============ -->
-  <div class="panel clickable"
-       data-producto="Calcetines"
-       data-descripcion="Calcetines Koonol NAAT"
-       data-precio="Consultar precio"
-       data-promo=""
-       data-link="https://kerimmusic.github.io/DescargarAppOmegaBeats/">
-    <div class="ilustracion">
-      <img src="https://www.dropbox.com/scl/fi/h83l4vk3brcmlq9pg0ok2/Calcetines.jpeg?rlkey=grpx0lvk3pr4jfdy0qjvx1x16&st=scqv07pw&raw=1"
-           alt="Calcetines" loading="lazy">
-      <button class="btn-overlay" type="button">CONSULTAR SI HAY PRODUCTO</button>
-    </div>
-    <p>Calcetines</p>
-  </div>
-
-</main>
-
-<!-- ============ Pantalla de armado del pedido ============ -->
-<section id="pantalla-pedido" style="display: none;">
-  <button class="btn-volver" onclick="volverAlInicio()">← Volver</button>
-
-  <h2 class="titulo-principal">Haz tu pedido</h2>
-
-  <div class="banner-top">
-    <img src="https://www.dropbox.com/scl/fi/6hdoiow6p9zrdggcq98ow/Fresasconchatillin.jpeg?rlkey=u5w0swogl12vnyrwc0e9f8tkt&st=tunp96rb&raw=1" alt="Banner">
-  </div>
-
-  <h2 class="titulo-principal">LA 1 CAJA $35 MXN</h2>
-
-  <div class="promo-box">
-    <h3>Arma tus fresas</h3>
-    <p>¡Arma tus fresas a tu gusto! 🍓<br>
-    Elige tus ingredientes y prepara tu combinación favorita como tú quieras.<br>
-    🛵 Pídelas a domicilio o<br>
-    🏪 pasa por ellas a nuestra tienda.<br>
-    ¡Tú eliges cómo disfrutarlas! 🍓✨</p>
-  </div>
-
-  <div class="lista-ingredientes">
-    <div class="item-row">
-      <div class="item-img-circle">
-        <img src="https://www.dropbox.com/scl/fi/ujrovugrfibrdpkb6cegq/Rayaduradecoro.jpeg?rlkey=mddnqje2mzbxktm6ygk8g77wk&st=j2i6ih68&raw=1" alt="Ralladura de coco">
-      </div>
-      <span class="item-text">Ralladura de coco.</span>
-      <button class="btn-agregar">Agregar</button>
+    <!-- AVISO: solo aparece si estamos dentro de una app (Instagram, FB, TikTok, etc.) -->
+    <div id="browser-notice" class="browser-notice">
+        <span class="bn-icon">⚠️</span>
+        <p>Estás dentro de una app. Para descargar, ábrelo en tu navegador.</p>
+        <button type="button" id="notice-btn">Abrir en navegador</button>
     </div>
 
-    <div class="item-row">
-      <div class="item-img-circle">
-        <img src="https://www.dropbox.com/scl/fi/tbacql42vf8fris7wvzwy/chocolate.jpeg?rlkey=5itjk17t0u85ibdtja4iona7s&st=rf8v3k5r&raw=1" alt="Chispas de chocolate">
-      </div>
-      <span class="item-text">Chispas Chocolate.</span>
-      <button class="btn-agregar">Agregar</button>
-    </div>
+    <div class="container">
 
-    <div class="item-row">
-      <div class="item-img-circle">
-        <img src="https://www.dropbox.com/scl/fi/e5uo6uiih7vy3s88zg2l8/Alegria.jpeg?rlkey=q2dmn6wh9uobc1kpdp6vydzjs&st=0yynewjx&raw=1" alt="Chispas Alegría">
-      </div>
-      <span class="item-text">Chispas Alegría.</span>
-      <button class="btn-agregar">Agregar</button>
-    </div>
-  </div>
-
-  <button class="btn-ver-pedido" id="btn-combo">Combo 3 x $100 MXN</button>
-  <button class="btn-ver-pedido" id="btn-ver-pedido">Ver tu pedido</button>
-</section>
-
-<!-- ============ Pantalla del Combo 3 x $100 ============ -->
-<section id="pantalla-combo" style="display: none;">
-  <button class="btn-volver" onclick="volverAlPedidoSimple()">← Volver</button>
-
-  <h2 class="titulo-principal">Combo 3 x $100 MXN</h2>
-  <p class="subtitulo-combo">Elige los ingredientes de cada caja 🍓</p>
-
-  <div class="combo-lista">
-    <!-- Caja 1 -->
-    <div class="combo-item">
-      <div class="combo-cabecera">
-        <span class="combo-numero">1</span>
-        <div class="combo-img">
-          <svg viewBox="0 0 100 124"><use href="#icono-milk"/></svg>
+        <div class="logo-section">
+            <img src="https://www.dropbox.com/scl/fi/6e7qxx06cip1720viw4zt/Omega.png?rlkey=pujvgx4l2w9cl3c2wiyk0tbgf&st=5wvschfp&raw=1" alt="Omega Beats Logo">
         </div>
-      </div>
-      <button class="btn-desplegable" data-caja="1">
-        <span class="btn-desplegable-texto">Elige tus ingredientes 🍓</span>
-        <span class="flecha">▼</span>
-      </button>
-      <div class="combo-opciones" id="opciones-caja-1">
-        <label class="opcion-ing"><input type="checkbox" value="Ralladura de coco."> Ralladura de coco.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Chocolate."> Chispas Chocolate.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Alegría."> Chispas Alegría.</label>
-      </div>
-    </div>
 
-    <!-- Caja 2 -->
-    <div class="combo-item">
-      <div class="combo-cabecera">
-        <span class="combo-numero">2</span>
-        <div class="combo-img">
-          <svg viewBox="0 0 100 124"><use href="#icono-milk"/></svg>
+        <a href="https://download1351.mediafire.com/pzvevqhly1pge6EB-hkG_oGHEc1mbi2PWIXmA7BP_dGl7YVc1DEQp3htj8MAcyibWDrMSakme4FRoWHe1x5I79QQmJ5BY3rghQiXrZLoIv8UrVs-2ewdunG-Wwv94z0_guBTLdU6erv22Aza-VwMQNAMZ2nmvoZdsZ0EZj5fBYdj6Q/v58uk7eholzjnst/app4183393-bd2q7x.apk"
+           class="download-btn"
+           rel="noopener">Descargar</a>
+
+        <div class="share-section">
+            <p>COMPARTIR</p>
+            <button type="button" class="share-btn" onclick="compartirApp()">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+            </button>
         </div>
-      </div>
-      <button class="btn-desplegable" data-caja="2">
-        <span class="btn-desplegable-texto">Elige tus ingredientes 🍓</span>
-        <span class="flecha">▼</span>
-      </button>
-      <div class="combo-opciones" id="opciones-caja-2">
-        <label class="opcion-ing"><input type="checkbox" value="Ralladura de coco."> Ralladura de coco.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Chocolate."> Chispas Chocolate.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Alegría."> Chispas Alegría.</label>
-      </div>
+
     </div>
 
-    <!-- Caja 3 -->
-    <div class="combo-item">
-      <div class="combo-cabecera">
-        <span class="combo-numero">3</span>
-        <div class="combo-img">
-          <svg viewBox="0 0 100 124"><use href="#icono-milk"/></svg>
-        </div>
-      </div>
-      <button class="btn-desplegable" data-caja="3">
-        <span class="btn-desplegable-texto">Elige tus ingredientes 🍓</span>
-        <span class="flecha">▼</span>
-      </button>
-      <div class="combo-opciones" id="opciones-caja-3">
-        <label class="opcion-ing"><input type="checkbox" value="Ralladura de coco."> Ralladura de coco.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Chocolate."> Chispas Chocolate.</label>
-        <label class="opcion-ing"><input type="checkbox" value="Chispas Alegría."> Chispas Alegría.</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="combo-total-bar">
-    <span class="combo-total-texto" id="combo-total-texto">3 piezas · $100 MXN</span>
-    <button class="btn-mas" id="btn-mas" type="button">MAS +</button>
-  </div>
-
-  <button class="btn-ver-pedido btn-rosa" id="btn-ver-pedido-combo">Ver tu pedido</button>
-</section>
-
-<!-- ============ Pantalla de resumen / confirmación ============ -->
-<section id="pantalla-resumen" style="display: none;">
-  <button class="btn-volver" onclick="volverAlPedido()">← Volver</button>
-
-  <h2 class="titulo-resumen">“Tus Fresas están listas”</h2>
-
-  <input id="input-nombre" class="input-nombre" type="text" placeholder="Nombre:" autocomplete="name">
-
-  <div class="resumen-lineas">
-    <p><span class="etiqueta-linea">Caja:</span> <span id="resumen-caja">1 caja de Fresas con Chantilly</span></p>
-    <p><span class="etiqueta-linea">Ingrediente:</span> <span id="resumen-ingredientes">Ninguno</span></p>
-  </div>
-
-  <div class="fila-opciones">
-    <span class="etiqueta">Pago</span>
-    <div class="grupo-botones" id="grupo-pago">
-      <button class="btn-opcion activo" data-valor="Al entregar">Al entregar</button>
-      <button class="btn-opcion" data-valor="Transferencia">Transferencia</button>
-    </div>
-  </div>
-
-  <div class="fila-opciones">
-    <span class="etiqueta">Envío:</span>
-    <div class="grupo-botones" id="grupo-envio">
-      <button class="btn-opcion activo" data-valor="Recoger">Recoger</button>
-      <button class="btn-opcion" data-valor="Envío a domicilio">Envío a domicilio</button>
-    </div>
-  </div>
-  <p class="nota-envio">$10 + costo de envío</p>
-
-  <textarea id="input-direccion" class="input-direccion" placeholder="Dirección de envío" disabled></textarea>
-
-  <p class="msg-error" id="msg-error"></p>
-
-  <button class="btn-ver-pedido" id="btn-hacer-pedido">HACER PEDIDO</button>
-</section>
-
-<!-- ============ Modal de confirmación ============ -->
-<div class="modal-overlay" id="modal-confirmacion" style="display: none;">
-  <div class="modal-card">
-    <h3>¡Pedido realizado! 🍓</h3>
-    <p id="modal-detalle"></p>
-    <button class="btn-ver-pedido" onclick="cerrarModal()">Aceptar</button>
-  </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
